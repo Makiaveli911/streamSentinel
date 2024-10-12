@@ -12,7 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copie du code source
 COPY . .
 
-RUN ls -al
+# Volume pour persister les logs
+VOLUME ["/app/logs"]
 
 # Lancer le script Python
 ENTRYPOINT ["python", "streamSentinel.py"]

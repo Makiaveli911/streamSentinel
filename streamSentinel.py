@@ -52,6 +52,17 @@ conn.commit()
 # Dictionnaire pour stocker les avertissements par utilisateur
 warnings = {}
 
+# Fonction pour ajouter un log dans un fichier texte
+def log_to_file(user, ips, warning_count):
+    warning_date = time.strftime('%Y-%m-%d %H:%M:%S')  # Date et heure actuelle
+    log_message = f"Utilisateur: {user}, IPs: {', '.join(ips)}, Avertissements: {warning_count}/3, Date: {warning_date}\n"
+    
+    # Ouvre le fichier en mode append pour ajouter les logs à la fin du fichier
+    with open('streamSentinel_warnings.log', 'a') as log_file:
+        log_file.write(log_message)
+    
+    logging.info(f"Log écrit dans le fichier pour {user} : {log_message.strip()}")
+
 # Fonction pour obtenir le nombre d'avertissements d'un utilisateur
 def get_warning_count(user):
     c.execute('SELECT count FROM warnings WHERE user = ?', (user,))
@@ -147,6 +158,9 @@ def check_sessions():
             warnings[user] += 1
             # Mettre à jour la base de données
             update_warning_count(user, warnings[user])
+
+            # Enregistrer le log dans le fichier texte
+            log_to_file(user, unique_ips, warnings[user])
 
             # Gestion des avertissements
             if warnings[user] >= MAX_WARNINGS:
