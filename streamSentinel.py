@@ -38,8 +38,8 @@ logging.info("Connexion à Plex Server...")
 plex = PlexServer(PLEX_URL, PLEX_TOKEN)
 account = MyPlexAccount(EMAIL, MOT_DE_PASS)
 
-# Connexion à la base de données SQLite
-conn = sqlite3.connect('streamSentinel.db')
+# Connexion à la base de données SQLite dans le répertoire monté
+conn = sqlite3.connect('/app/data/streamSentinel.db')
 c = conn.cursor()
 
 # Créer la table des avertissements si elle n'existe pas
@@ -58,7 +58,7 @@ def log_to_file(user, ips, warning_count):
     log_message = f"Utilisateur: {user}, IPs: {', '.join(ips)}, Avertissements: {warning_count}/3, Date: {warning_date}\n"
     
     # Ouvre le fichier en mode append pour ajouter les logs à la fin du fichier
-    with open('streamSentinel_warnings.log', 'a') as log_file:
+    with open('/app/logs/streamSentinel_warnings.log', 'a') as log_file:
         log_file.write(log_message)
     
     logging.info(f"Log écrit dans le fichier pour {user} : {log_message.strip()}")
