@@ -3,7 +3,7 @@ services:
     image: makiaveli911/streamsentinel:latest
     container_name: streamsentinel
     volumes:
-     - /srv/dev-disk-by-uuid-1308d86a-250c-4229-a217-bb2a4045bbb3/Data/Docker/compose/streamsentinel/.env:/app/.env    
+     - /srv/dev-disk-by-uuid-1308d86a-250c-4229-a217-bb2a4045bbb3/Data/Docker/config/streamsentinel/.env:/app/.env    
      - /srv/dev-disk-by-uuid-1308d86a-250c-4229-a217-bb2a4045bbb3/Data/Docker/config/streamsentinel/logs:/app/logs
      - /srv/dev-disk-by-uuid-1308d86a-250c-4229-a217-bb2a4045bbb3/Data/Docker/config/streamsentinel/data:/app/data
     restart: always

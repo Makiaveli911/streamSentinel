@@ -245,7 +245,7 @@ def run_streamSentinel():
 
         # Conversion de TIME_RESTART en format lisible
         formatted_time = format_time_interval(TIME_RESTART)
-        logging.info("Attente avant la prochaine vérification ({formatted_time})...")
+        logging.info(f"Attente avant la prochaine vérification ({formatted_time})...")
         time.sleep(TIME_RESTART)
 
 # Démarrage du streamSentinel
